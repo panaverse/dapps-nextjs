@@ -4,7 +4,7 @@ import { signMessage } from "../utils/sign";
 import Link from "next/link";
 import Metamask from "../component/Metamask";
 
-interface ConnectionStatus{
+interface ClientStatus{
   isConnected: boolean;
   address?: string;
 }
@@ -13,7 +13,7 @@ const Index: NextPage = () => {
 
   const [haveMetamask, sethaveMetamask] = useState<boolean>(true);
 
-  const [client, setclient] = useState<ConnectionStatus>({
+  const [clientStatus, setClientStatus] = useState<ClientStatus>({
     isConnected: false,
   });
 
@@ -23,12 +23,12 @@ const Index: NextPage = () => {
       sethaveMetamask(true);
       const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
-        setclient({
+        setClientStatus({
           isConnected: true,
           address: accounts[0],
         });
       } else {
-        setclient({
+        setClientStatus({
           isConnected: false,
         });
       }
@@ -50,7 +50,7 @@ const Index: NextPage = () => {
         method: "eth_requestAccounts",
       });
 
-      setclient({
+      setClientStatus({
         isConnected: true,
         address: accounts[0],
       });
@@ -73,10 +73,10 @@ const Index: NextPage = () => {
         <div className="d-flex" style={{ marginLeft: "auto" }}>
           <div>
             <button className="btn connect-btn" onClick={connectWeb3}>
-              {client.isConnected ? (
+              {clientStatus.isConnected ? (
                 <>
-                  {client.address.slice(0, 4)}...
-                  {client.address.slice(38, 42)}
+                  {clientStatus.address?.slice(0, 4)}...
+                  {clientStatus.address?.slice(38, 42)}
                 </>
               ) : (
                 <>Connect Wallet</>
@@ -105,7 +105,7 @@ const Index: NextPage = () => {
           <p>
             {!haveMetamask ? (
               <Metamask />
-            ) : client.isConnected ? (
+            ) : clientStatus.isConnected ? (
               <>
                 <br />
                 <h2>You're connected ✅</h2>
