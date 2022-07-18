@@ -46,7 +46,7 @@ const Index: NextPage = () => {
         return;
       }
 
-      const accounts = await ethereum.request({
+      const accounts: string[] = await ethereum.request({
         method: "eth_requestAccounts",
       });
 
