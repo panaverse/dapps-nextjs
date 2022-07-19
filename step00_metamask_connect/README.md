@@ -4,6 +4,12 @@ npx create-next-app step39_cms_contentful --ts
 
 yarn add ethers
 
+[Building a DApp with Ethers.js](https://blog.logrocket.com/building-dapp-ethers-js/)
+
+[Master Ethers.js for Blockchain Step-by-Step](https://www.youtube.com/watch?v=yk7nVp5HTCk)
+
+[A beginner’s guide: 4 ways to play with `Ethers.js`](https://dev.to/yakult/a-beginers-guide-four-ways-to-play-with-ethersjs-354a)
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
