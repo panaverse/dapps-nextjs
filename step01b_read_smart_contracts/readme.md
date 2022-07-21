@@ -1,4 +1,4 @@
-# Connect to Samart Contracts using Ethers.js
+# Connect to Samart Contracts using Ethers.js using Types SDK
 
 To get a initial understanding of Ethers we are going to follow [Master Ethers.js for Blockchain Step-by-Step](https://www.youtube.com/watch?v=yk7nVp5HTCk)
 
