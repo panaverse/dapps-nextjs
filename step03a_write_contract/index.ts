@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import {TransactionResponse} from '@ethersproject'
 
 const INFURA_ID: string = ''
 const provider: ethers.providers.JsonRpcProvider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${INFURA_ID}`)
@@ -18,20 +19,20 @@ const address: string = ''
 const contract: ethers.Contract = new ethers.Contract(address, ERC20_ABI, provider)
 
 const main = async () => {
-    const balance = await contract.balanceOf(account1)
+    const balance: ethers.BigNumber = await contract.balanceOf(account1)
 
     console.log(`\nReading from ${address}\n`)
     console.log(`Balance of sender: ${balance}\n`)
 
-    const contractWithWallet = contract.connect(wallet)
+    const contractWithWallet: ethers.Contract = contract.connect(wallet)
 
     const tx = await contractWithWallet.transfer(account2, balance)
     await tx.wait()
 
     console.log(tx)
 
-    const balanceOfSender = await contract.balanceOf(account1)
-    const balanceOfReciever = await contract.balanceOf(account2)
+    const balanceOfSender: ethers.BigNumber = await contract.balanceOf(account1)
+    const balanceOfReciever: ethers.BigNumber = await contract.balanceOf(account2)
 
     console.log(`\nBalance of sender: ${balanceOfSender}`)
     console.log(`Balance of reciever: ${balanceOfReciever}\n`)

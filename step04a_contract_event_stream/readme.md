@@ -1,8 +1,8 @@
-# Write to Smart Contracts using Ethers.js
+# Contract Event Streams using Ethers.js
 
 To get a initial understanding of Ethers we are going to follow [Master Ethers.js for Blockchain Step-by-Step](https://www.youtube.com/watch?v=yk7nVp5HTCk)
 
-Watch Video 53:00 to 1:05:00
+Watch Video 1:05:00 to 23:00
 
 [Download and Install Node](https://nodejs.org/en/download/)
 
@@ -12,7 +12,7 @@ Install Typescript:
 
 npm install -g typescript
 
-mkdir step03a_write_contract
+mkdir step00_hello_ethers
 
 npm init
 
