@@ -2,7 +2,7 @@
 
 To get a initial understanding of Ethers we are going to follow [Master Ethers.js for Blockchain Step-by-Step](https://www.youtube.com/watch?v=yk7nVp5HTCk)
 
-Watch Video 1:05:00 to 23:00
+Watch Video 1:05:00 to 1:17:15
 
 [Download and Install Node](https://nodejs.org/en/download/)
 
