@@ -1,5 +1,7 @@
 # Connect Metamask using Ethers.js
 
+[Install Metamask](https://github.com/LearnWeb3DAO/Crypto-Wallets)
+
 [Connecting to Ethereum: MetaMask Official Docs](https://docs.ethers.io/v5/getting-started/#getting-started--connecting)
 
 [We suggest you also review the APIs](https://docs.ethers.io/v5/api/)
@@ -12,6 +14,11 @@ npx create-next-app step06_metamask_connect_nextjs --ts
 yarn add ethers
 
 [Building a DApp with Ethers.js](https://blog.logrocket.com/building-dapp-ethers-js/)
+
+https://dev.to/learnweb3/build-a-simple-whitelist-dapp-using-solidity-nextjs-ethersjs-on-ethereum-4c21
+
+https://javascript.plainenglish.io/fullstack-nft-minting-dapp-using-next-js-hardhat-ethers-js-alchemy-metamask-and-tailwindcss-145e0ef41d26
+
 
 
 
