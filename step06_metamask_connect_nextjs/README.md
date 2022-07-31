@@ -1,14 +1,18 @@
 # Connect Metamask using Ethers.js
 
-npx create-next-app step39_cms_contentful --ts
+[Connecting to Ethereum: MetaMask Official Docs](https://docs.ethers.io/v5/getting-started/#getting-started--connecting)
+
+[We suggest you also review the APIs](https://docs.ethers.io/v5/api/)
+
+[A beginner’s guide: 4 ways to play with `Ethers.js`](https://dev.to/yakult/a-beginers-guide-four-ways-to-play-with-ethersjs-354a)
+
+
+npx create-next-app step06_metamask_connect_nextjs --ts
 
 yarn add ethers
 
 [Building a DApp with Ethers.js](https://blog.logrocket.com/building-dapp-ethers-js/)
 
-[Master Ethers.js for Blockchain Step-by-Step](https://www.youtube.com/watch?v=yk7nVp5HTCk)
-
-[A beginner’s guide: 4 ways to play with `Ethers.js`](https://dev.to/yakult/a-beginers-guide-four-ways-to-play-with-ethersjs-354a)
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

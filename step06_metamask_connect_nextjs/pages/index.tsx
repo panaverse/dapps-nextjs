@@ -17,6 +17,7 @@ const Index: NextPage = () => {
     isConnected: false,
   });
 
+
   const checkConnection = async () => {
     const { ethereum } = window as any;
     if (ethereum) {
@@ -36,6 +37,7 @@ const Index: NextPage = () => {
       sethaveMetamask(false);
     }
   };
+
 
   const connectWeb3 = async () => {
     try {
@@ -59,9 +61,11 @@ const Index: NextPage = () => {
     }
   };
 
+
   useEffect(() => {
     checkConnection();
   }, []);
+  
 
   return (
     <>
