@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { signMessage } from "../utils/sign";
 import Link from "next/link";
 import Metamask from "../component/Metamask";
+import { ethers } from "ethers";
 
 interface ClientStatus{
   isConnected: boolean;
@@ -17,12 +18,16 @@ const Index: NextPage = () => {
     isConnected: false,
   });
 
+  let provider: ethers.providers.Web3Provider;
+
 
   const checkConnection = async () => {
     const { ethereum } = window as any;
     if (ethereum) {
       sethaveMetamask(true);
-      const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
+      provider = new ethers.providers.Web3Provider((window as any).ethereum);
+      const accounts: string[] = await provider.send("eth_accounts", []);
+      //const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
         setClientStatus({
           isConnected: true,
@@ -40,6 +45,7 @@ const Index: NextPage = () => {
 
 
   const connectWeb3 = async () => {
+    console.log("In ConnectWeb3: Start");
     try {
       const { ethereum } = window as any;
 
@@ -47,10 +53,10 @@ const Index: NextPage = () => {
         console.log("Metamask not detected");
         return;
       }
+      const accounts: string[] = await provider.send("eth_requestAccounts", []);
+      //const accounts: string[] = await ethereum.request({method: "eth_requestAccounts"});
 
-      const accounts: string[] = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
+      console.log("In ConnectWeb3: After")
 
       setClientStatus({
         isConnected: true,
