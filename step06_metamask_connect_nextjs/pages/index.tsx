@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { signMessage } from "../utils/sign";
 import Link from "next/link";
 import Metamask from "../component/Metamask";
-import { ethers } from "ethers";
+//import { ethers } from "ethers";
 
 interface ClientStatus{
   isConnected: boolean;
@@ -18,16 +18,15 @@ const Index: NextPage = () => {
     isConnected: false,
   });
 
-  let provider: ethers.providers.Web3Provider;
+  //let provider: ethers.providers.Web3Provider;
 
 
   const checkConnection = async () => {
     const { ethereum } = window as any;
     if (ethereum) {
       sethaveMetamask(true);
-      provider = new ethers.providers.Web3Provider((window as any).ethereum);
-      const accounts: string[] = await provider.send("eth_accounts", []);
-      //const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
+      
+      const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
         setClientStatus({
           isConnected: true,
@@ -45,7 +44,7 @@ const Index: NextPage = () => {
 
 
   const connectWeb3 = async () => {
-    console.log("In ConnectWeb3: Start");
+    //console.log("In ConnectWeb3: Start");
     try {
       const { ethereum } = window as any;
 
@@ -53,10 +52,13 @@ const Index: NextPage = () => {
         console.log("Metamask not detected");
         return;
       }
-      const accounts: string[] = await provider.send("eth_requestAccounts", []);
-      //const accounts: string[] = await ethereum.request({method: "eth_requestAccounts"});
+      
+      const accounts: string[] = await ethereum.request({method: "eth_requestAccounts"});
 
-      console.log("In ConnectWeb3: After")
+      //console.log("In ConnectWeb3: After")
+      //provider = new ethers.providers.Web3Provider((window as any).ethereum);
+
+
 
       setClientStatus({
         isConnected: true,
@@ -82,7 +84,7 @@ const Index: NextPage = () => {
         <main>
           <h1 className="main-title">Awesome DApp</h1>
 
-          <p>
+          <div>
             {!haveMetamask ? (
               <Metamask />
             ) : clientStatus.isConnected ? (
@@ -105,7 +107,7 @@ const Index: NextPage = () => {
                 </button>
               </>
             )}
-          </p>
+          </div>
           {/* ---- */}
         </main>
       </section>
