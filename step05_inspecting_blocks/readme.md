@@ -24,5 +24,5 @@ Create index.ts file
 
 tsc
 
-node index
+ts-node index
 
