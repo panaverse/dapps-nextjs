@@ -4,8 +4,7 @@
 
 [@web3-react/core documentation](https://www.npmjs.com/package/@web3-react/core)
 
-[How to Connect your Smart Contracts to Metamask](https://github.com/PatrickAlphaC/full-stack-web3-metamask-connectors)
-[How to Connect your Smart Contracts to Metamask - video](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
+[How to Connect your Smart Contracts to Metamask](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
 
 
 npx create-next-app step08_metamask_web3react_connect_nextjs --ts

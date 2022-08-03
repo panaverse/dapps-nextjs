@@ -4,8 +4,7 @@
 
 [web3modal documentation](https://www.npmjs.com/package/web3modal)
 
-[How to Connect your Smart Contracts to Metamask](https://github.com/PatrickAlphaC/full-stack-web3-metamask-connectors)
-[How to Connect your Smart Contracts to Metamask - video](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
+[How to Connect your Smart Contracts to Metamask](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
 
 
 npx create-next-app step07_web3model_connect_nextjs --ts
