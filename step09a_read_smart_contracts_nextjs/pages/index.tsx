@@ -37,10 +37,7 @@ const Index: NextPage = () => {
       
       const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
-        setClientStatus({
-          isConnected: true,
-          address: accounts[0],
-        });
+        await updateBalance(accounts[0]);
       } else {
         setClientStatus({
           isConnected: false,
@@ -66,7 +63,7 @@ const Index: NextPage = () => {
 
       console.log("In ConnectWeb3: After")
       
-      //await updateBalance(accounts[0]);
+      await updateBalance(accounts[0]);
 
     } catch (error) {
       console.log("Error connecting to metamask", error);
@@ -79,7 +76,7 @@ const Index: NextPage = () => {
     const address: string = '0x97cb342Cf2F6EcF48c1285Fb8668f5a4237BF862'; // DAI Contract https://goerli.etherscan.io/address/0x97cb342Cf2F6EcF48c1285Fb8668f5a4237BF862
     contract = new ethers.Contract(address, ERC20_ABI, provider);
     const balance: ethers.BigNumber = await contract.balanceOf(account);
-    const balanceFormated: string = ethers.utils.formatEther(contract.balanceOf(account));
+    const balanceFormated: string = ethers.utils.formatEther(balance);
     console.log("updateBalance: Balance: " + balance);
     setClientStatus({
       isConnected: true,
