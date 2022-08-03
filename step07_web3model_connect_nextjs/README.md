@@ -1,4 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Connect Metamask using web3model
+
+[Install Metamask](https://github.com/LearnWeb3DAO/Crypto-Wallets)
+
+[web3modal documentation](https://www.npmjs.com/package/web3modal)
+
+[How to Connect your Smart Contracts to Metamask](https://github.com/PatrickAlphaC/full-stack-web3-metamask-connectors)
+[How to Connect your Smart Contracts to Metamask - video](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
+
+
+npx create-next-app step07_web3model_connect_nextjs --ts
+
+
+## Usage
+1. Install ethers and Web3Modal NPM package
+```bash
+yarn add web3modal ethers
+```
+
+2. Install Provider packages
+/* See Provider Options Section */
+
+3. Then you can add Web3Modal to your Dapp as follows
+```bash
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+
+const providerOptions = {
+  /* See Provider Options Section */
+};
+
+const web3Modal = new Web3Modal({
+  network: "mainnet", // optional
+  cacheProvider: true, // optional
+  providerOptions // required
+});
+
+const instance = await web3Modal.connect();
+
+const provider = new ethers.providers.Web3Provider(instance);
+const signer = provider.getSigner();
+const address = await signer.getAddress();
+```
+
 
 ## Getting Started
 

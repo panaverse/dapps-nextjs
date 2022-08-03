@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 
 let web3Modal: Web3Modal;
 
+// use only if you want your app to support Walletconnect wallet.
+// See documentation to support more wallets.
+
 const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
@@ -44,7 +47,6 @@ const Home: NextPage = () => {
     if (typeof window.ethereum !== "undefined") {
       try {
         const web3ModalProvider = await web3Modal.connect();
-        // setIsConnected(true);
         const provider = new ethers.providers.Web3Provider(web3ModalProvider);
         const signer = provider.getSigner();
         const address = await signer.getAddress();

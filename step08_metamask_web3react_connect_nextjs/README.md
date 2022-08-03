@@ -1,4 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Connect Metamask using @web3-react/core
+
+[Install Metamask](https://github.com/LearnWeb3DAO/Crypto-Wallets)
+
+[@web3-react/core documentation](https://www.npmjs.com/package/@web3-react/core)
+
+[How to Connect your Smart Contracts to Metamask](https://github.com/PatrickAlphaC/full-stack-web3-metamask-connectors)
+[How to Connect your Smart Contracts to Metamask - video](https://www.youtube.com/watch?v=pdsYCkUWrgQ)
+
+
+npx create-next-app step08_metamask_web3react_connect_nextjs --ts
+
+## Quickstart
+1. Install packages
+
+```bash
+yarn add @web3-react/core @web3-react/injected-connector @ethersproject/providers ethers
+```
+
+2. Wrap the root of the app with Web3ReactProvider
+```bash
+import { Web3ReactProvider } from "@web3-react/core";
+import { Web3Provider, ExternalProvider } from "@ethersproject/providers";
+
+const getLibrary = (provider: ExternalProvider) => {
+  return new Web3Provider(provider);
+};
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Component {...pageProps} />
+    </Web3ReactProvider>
+  )
+}
+
+export default MyApp
+```
+
+3. Usage 
+
+```bash
+
+import { useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
+
+const injected = new InjectedConnector({
+  supportedChainIds: [1, 3, 4, 5, 42]
+});
+
+const { active, activate, deactivate, chainId, account, library} = useWeb3React();
+
+async function connect() {
+    await activate(injected);
+}
+
+```
+
 
 ## Getting Started
 
