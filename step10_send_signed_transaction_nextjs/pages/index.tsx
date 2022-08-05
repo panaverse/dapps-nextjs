@@ -25,7 +25,7 @@ const Index: NextPage = () => {
 
   const [amount, setAmount] = useState<string>("");
 
-  var provider: ethers.providers.Web3Provider;
+  let provider: ethers.providers.Web3Provider;
 
   const checkConnection = async () => {
     const { ethereum } = window as any;
