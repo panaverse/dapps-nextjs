@@ -1,20 +1,18 @@
-# Read Smart Contracts using Ethers.js in Browser
+# Send Signed Transaction in Browser
 
 Note that the Goerli testnet will be part of the Ethereum ecosystem for the long term in a post-merge world. Developers are being encouraged to use Goerli testnet when testing new protocols.
 
+
 [Mint Georli Ethers from this Faucet](https://goerlifaucet.com/)
-
-[Mint Georli DAI from the contract mentioned in the post on Etherscan](https://ethereum.stackexchange.com/questions/72388/does-rinkeby-have-a-faucet-where-i-can-fill-a-wallet-with-dai)
-
-[Georli DAI Contract](https://goerli.etherscan.io/address/0x97cb342Cf2F6EcF48c1285Fb8668f5a4237BF862)
-
 
 npx create-next-app step09a_read_smart_contracts_nextjs --ts
 
 yarn add ethers
 
+yarn add @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4 @chakra-ui/icons
 
 
+[Read about UI Components Used](https://chakra-ui.com/docs/components/form-control)
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
