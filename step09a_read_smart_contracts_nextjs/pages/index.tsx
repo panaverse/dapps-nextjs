@@ -36,6 +36,14 @@ const Index: NextPage = () => {
       sethaveMetamask(true);
       
       const accounts: string[] = await ethereum.request({ method: "eth_accounts" });
+      const {chainId} = await new ethers.providers.Web3Provider((window as any).ethereum).getNetwork();
+      console.log("chainId: ", chainId);
+
+      if(chainId !== 5){
+        alert("Please switch to Goerli testnet")
+        throw("NETWORK CHAIN ERROR")
+      }
+
       if (accounts.length > 0) {
         await updateBalance(accounts[0]);
       } else {
@@ -43,6 +51,7 @@ const Index: NextPage = () => {
           isConnected: false,
         });
       }
+
     } else {
       sethaveMetamask(false);
     }
@@ -60,6 +69,7 @@ const Index: NextPage = () => {
       }
       
       const accounts: string[] = await ethereum.request({method: "eth_requestAccounts"});
+
 
       console.log("In ConnectWeb3: After")
       
