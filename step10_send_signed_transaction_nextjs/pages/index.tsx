@@ -18,25 +18,11 @@ const Index: NextPage = () => {
   const [clientStatus, setClientStatus] = useState<ClientStatus>({
     isConnected: false,
   });
-  
+
   const [address, setAddress] = useState<string>('');
   const [amount, setAmount] = useState<string>("");
-  const [provider, setProvider] = useState<ethers.providers.Web3Provider>();
-  
-  const sendEther = async () => {
 
-    console.log("send ether called");
-    console.log("Provider at start of sendEther: " + provider);
-    console.log("haveMetamask: " + haveMetamask);
-
-    const signer = provider?.getSigner();
-
-    await signer?.sendTransaction({
-      to: address,
-      value: ethers.utils.parseEther(amount)
-    });
-
-  }
+  const [provider, setProvider] = useState<ethers.providers.Provider>();
 
   const checkConnection = async () => {
     const { ethereum } = window as any;
@@ -90,21 +76,41 @@ const Index: NextPage = () => {
   const updateBalance = async (account: string) => {
     console.log("updateBalance: Begin");
     console.log("Provider at beginning of updateBalance: " + provider);
-    
-    const balance: ethers.BigNumber = (await provider?.getBalance(account))!;
-    const balanceFormated = ethers.utils.formatEther(balance);
-    console.log("updateBalance: Balance: " + balance);
 
-    setClientStatus((e) => ({
-      ...e,
-      isConnected: true,
-      address: account,
-      balance: balanceFormated
-    }));
+    if (provider) {
+      const balance = await provider.getBalance(account);
+      const balanceFormated = ethers.utils.formatEther(balance);
+
+      console.log("updateBalance: Balance: " + balance);
+
+      setClientStatus((e) => ({
+        ...e,
+        address: account,
+        isConnected: true,
+        balance: balanceFormated
+      }));
+    }
+    else {
+      console.log("No provider found")
+    }
 
 
   };
 
+  const sendEther = async () => {
+
+    console.log("send ether called");
+    console.log("Provider at start of sendEther: " + provider);
+    console.log("haveMetamask: " + haveMetamask);
+    
+    const signer = provider?.getSigner();
+
+    await signer?.sendTransaction({
+      to: address,
+      value: ethers.utils.parseEther(amount)
+    });
+
+  }
 
   useEffect(() => {
     checkConnection();
@@ -112,57 +118,45 @@ const Index: NextPage = () => {
 
 
   return (
-    <>
-      <section className="container d-flex">
-        <main>
-          <h1 className="main-title">Awesome DApp</h1>
+    <div>
+      <h2>Let's transfer some Ethers</h2>
+      <br />
 
-          <div>
-            {!haveMetamask ? (
-              <Metamask />
-            ) : clientStatus.isConnected ? (
-              <>
-                <br />
-                <h2>You're connected ✅</h2>
-                <div>My Metamask Account:</div>
-                <div>{clientStatus?.address}</div>
-                <div>You have Georli Ether:</div>
-                <div>{clientStatus?.balance}</div>
-                <br />
+      <div>
+        {
+          !haveMetamask ? (<Metamask />) : clientStatus.isConnected ? (
+            <>
+              <h2>You're connected ✅</h2>
+              <div>My Metamask Account: {clientStatus?.address}</div>
+              <div>My Ethers: {clientStatus?.balance}</div>
+              <br />
 
+              <div>
                 <div>
-                  <div>
-                    <FormControl isRequired>
-                      <FormLabel>Receiver's Address</FormLabel>
-                      <Input placeholder='address' width="2xl" onChange={event => setAddress(event.currentTarget.value)} />
-                    </FormControl>
-                  </div>
-                  <div>
-                    <FormControl isRequired>
-                      <FormLabel>Amount</FormLabel>
-                      <Input placeholder='0.0' width="30" onChange={event => setAmount(event.currentTarget.value)} />
-                    </FormControl>
-                  </div>
-                  <Button onClick={sendEther}>Send Ether</Button>
+                  <FormControl isRequired>
+                    <FormLabel>Receiver's Address</FormLabel>
+                    <Input placeholder='address' width="2xl" onChange={event => setAddress(event.currentTarget.value)} />
+                  </FormControl>
                 </div>
+                <div>
+                  <FormControl isRequired>
+                    <FormLabel>Amount</FormLabel>
+                    <Input placeholder='0.0' width="30" onChange={event => setAmount(event.currentTarget.value)} />
+                  </FormControl>
+                </div>
+                <Button onClick={sendEther}>Send Ether</Button>
+              </div>
+            </>
 
-
-
-              </>
-            ) : (
-              <>
-                <br />
-                <Button onClick={connectWeb3}>
-                  Connect Wallet
-                </Button>
-              </>
-            )}
-          </div>
-          {/* ---- */}
-        </main>
-      </section>
-    </>
+          ) : (
+              <Button onClick={connectWeb3}>
+                Connect Wallet
+              </Button>
+          )}
+      </div>
+    </div>
   );
+
 };
 
 export default Index;
