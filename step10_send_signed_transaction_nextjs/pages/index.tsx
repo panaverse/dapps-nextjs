@@ -101,11 +101,27 @@ const Index: NextPage = () => {
     console.log("send ether called");
     console.log("Provider at start of sendEther: " + provider);
     console.log("haveMetamask: " + haveMetamask);
-    const signer = provider?.getSigner();
-    await signer?.sendTransaction({
-      to: address,
-      value: ethers.utils.parseEther(amount)
-    });
+
+    if(provider && clientStatus){
+      
+      const signer = provider?.getSigner();
+      
+      await signer?.sendTransaction({
+        to: address,
+        value: ethers.utils.parseEther(amount)
+      });
+  
+      const newbalance = await provider?.getBalance(clientStatus.address!);
+      const newbalanceFormated = ethers.utils.formatEther(newbalance);
+  
+      console.log("updateBalance: Balance: " + newbalance);
+  
+      setClientStatus((e) => ({
+        ...e,
+        balance: newbalanceFormated
+      }));
+
+    }
 
   }
 
