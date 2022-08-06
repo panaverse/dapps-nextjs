@@ -98,13 +98,10 @@ const Index: NextPage = () => {
   };
 
   const sendEther = async () => {
-
     console.log("send ether called");
     console.log("Provider at start of sendEther: " + provider);
     console.log("haveMetamask: " + haveMetamask);
-    
     const signer = provider?.getSigner();
-
     await signer?.sendTransaction({
       to: address,
       value: ethers.utils.parseEther(amount)
