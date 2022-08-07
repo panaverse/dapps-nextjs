@@ -14,13 +14,18 @@ npx create-next-app@latest frontend --ts
 
 ## Backend
 
-Create a fresh Hardhat project with the following command. 
+Create a fresh Hardhat project inside the backend directory with the following command. 
 ```bash
 npx hardhat
 ```
-- Choose a template with typescript and install the required modules. 
-- Make a new contract file in the contract directory 
-- Add required information in the hardhat.config
+Then add all the required modules.
+```bash
+yarn -D add @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan @nomiclabs/hardhat-waffle @typechain/ethers-v5 @typechain/hardhat chai dotenv ethereum-waffle ethers hardhat-deploy hardhat-gas-reporter  solidity-coverage ts-node typescript
+```
+
+Then:
+- Make a new contract file in the contract directory and use the contract code from this example
+- Update the hardhat.config.ts file
 - Create a new directory with name "deploy" and add deployment scripts as mentioned in this project
 - Make a new .env file and put all the keys in there 
 
@@ -37,7 +42,7 @@ npx hardhat deploy --network kovan
 ```
 
 # Finally
-All set up. You are ready to use the contract on the frontend. 
+All set up. Deployment scripts have updatd the contract's Address and ABI in the frontend/utils/ directory. You are ready to use the contract on the frontend. 
 
 
 
