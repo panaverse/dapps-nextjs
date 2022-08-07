@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Whitelist.sol": {
+      "content": "  //SPDX-License-Identifier: Unlicense\r\n  pragma solidity 0.8.9;\r\n\r\n\r\n  contract Whitelist {\r\n\r\n      // Max number of whitelisted addresses allowed\r\n      uint8 public maxWhitelistedAddresses;\r\n\r\n      // Create a mapping of whitelistedAddresses\r\n      // if an address is whitelisted, we would set it to true, it is false by default for all other addresses.\r\n      mapping(address => bool) public whitelistedAddresses;\r\n      address[] private whitelistedAddressesList;\r\n\r\n      // numAddressesWhitelisted would be used to keep track of how many addresses have been whitelisted\r\n      // NOTE: Don't change this variable name, as it will be part of verification\r\n      uint8 public numAddressesWhitelisted;\r\n\r\n      // Setting the Max number of whitelisted addresses\r\n      // User will put the value at the time of deployment\r\n      constructor(uint8 _maxWhitelistedAddresses) {\r\n          maxWhitelistedAddresses = _maxWhitelistedAddresses;\r\n      }\r\n\r\n      /**\r\n          addAddressToWhitelist - This function adds the address of the sender to the\r\n          whitelist\r\n       */\r\n      function addAddressToWhitelist() public {\r\n          // check if the user has already been whitelisted\r\n          require(!whitelistedAddresses[msg.sender], \"Sender has already been whitelisted\");\r\n          // check if the numAddressesWhitelisted < maxWhitelistedAddresses, if not then throw an error.\r\n          require(numAddressesWhitelisted < maxWhitelistedAddresses, \"More addresses cant be added, limit reached\");\r\n          // Add the address which called the function to the whitelistedAddress array\r\n          whitelistedAddresses[msg.sender] = true;\r\n          // Increase the number of whitelisted addresses\r\n          numAddressesWhitelisted += 1;\r\n          // Add to the list so it can be displayed\r\n          whitelistedAddressesList.push(msg.sender);\r\n      }\r\n\r\n      function getWhitelistedAddressesList() public view returns(address[] memory){\r\n          return whitelistedAddressesList;\r\n      }\r\n\r\n  }\r\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

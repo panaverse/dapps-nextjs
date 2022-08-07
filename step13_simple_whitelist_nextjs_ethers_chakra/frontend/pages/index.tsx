@@ -191,6 +191,11 @@ export default function Home() {
 
           <Divider padding={3} />
 
+          <Text><a href='https://faucets.chain.link/' target="_blank" style={{textDecoration: "underline"}}> Get Kovan faucet eths </a></Text>
+          <Text><a href={`https://kovan.etherscan.io/address/${addresses.whitelist}`} target="_blank" style={{textDecoration: "underline"}}> This smart contract on EtherScan </a></Text>
+          
+          <Divider padding={3} />
+
           <Text textAlign="center" margin={5}>
             <b>{numberOfWhitelisted}</b> have already joined the Whitelist and only <b>{whitelistedLimit - numberOfWhitelisted}</b> slots left,
           </Text>
