@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Election.sol": {
+      "content": "//SPDX-License-Identifier: Unlicense\r\npragma solidity 0.8.9;\r\n\r\n// import \"hardhat/console.sol\";\r\n\r\ncontract Election {\r\n\r\n    // Model a Candidate\r\n    struct Candidate {\r\n        uint id;\r\n        string name;\r\n        uint256 voteCount;\r\n    }\r\n\r\n    struct Voter {\r\n        address voter;\r\n        uint256 votedOn;\r\n    }\r\n\r\n\r\n    // Store accounts that have voted\r\n    uint256 public totalVotes;\r\n    mapping(address => Voter) public voters;\r\n    Voter[] private votersList;\r\n\r\n    // Read/write candidates\r\n    mapping(uint8 => Candidate) public candidates;\r\n\r\n    // Store Candidates Count\r\n    uint8 public candidatesCount;\r\n\r\n    constructor () {\r\n        addCandidate(\"Asif Ali Zardari\");\r\n        addCandidate(\"Imran Khan\");\r\n        addCandidate(\"Nawaz Shareef\");\r\n    }\r\n\r\n    function addCandidate (string memory _name) private {\r\n        candidatesCount ++;\r\n        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);\r\n    }\r\n\r\n    function vote(uint8 _candidateId) public {\r\n        // require that they haven't voted before\r\n        require(voters[msg.sender].voter == address(0), \"Already voted\");\r\n\r\n        // require a valid candidate\r\n        require(_candidateId > 0 && _candidateId <= candidatesCount, \"not a valid customer ID\");\r\n\r\n        // record that voter has voted\r\n        Voter memory _voter = Voter(msg.sender, block.timestamp);\r\n        voters[msg.sender] = _voter; \r\n        votersList.push(_voter);\r\n\r\n        // update candidate vote Count\r\n        candidates[_candidateId].voteCount++;\r\n        totalVotes++;\r\n    }\r\n\r\n    function getVotersList() public view returns (Voter[] memory){\r\n        return votersList;\r\n    }\r\n\r\n\r\n    function getCandidatesList() public view returns (Candidate[] memory) {\r\n        Candidate[] memory candicatesss = new Candidate[](3);\r\n\r\n        for(uint8 i=0;  i < candidatesCount; i++){\r\n            candicatesss[i] = candidates[i+1];\r\n        }\r\n\r\n        return candicatesss;\r\n    }\r\n\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
