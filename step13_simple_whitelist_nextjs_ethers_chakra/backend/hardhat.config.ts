@@ -1,7 +1,8 @@
-import "@nomiclabs/hardhat-waffle"
+import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy"
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-ethers";
+import "@typechain/hardhat";
 
 require("dotenv").config();
 
@@ -28,5 +29,19 @@ module.exports = {
   },
   etherscan: {
     apiKey: ETHERSCAN_API_KEY,
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts"
+  },
+  typechain: {
+    outDir: '../frontend/types',
+    // outDir: './typechain',
+    target: 'ethers-v5',
+    // alwaysGenerateOverloads: false, // should overloads with full signatures like deposit(uint256) be generated always, even if there are no overloads?
+    // externalArtifacts: ['externalArtifacts/*.json'], // optional array of glob patterns with external artifacts to process (for example external libs from node_modules)
+    // dontOverrideCompile: false // defaults to true for javascript projects
   },
 };

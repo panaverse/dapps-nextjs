@@ -1,32 +1,18 @@
 import { ethers } from "hardhat";
 
 async function main() {
+  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
+  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
+  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
 
-  // Another way to deploy the contract
+  const lockedAmount = ethers.utils.parseEther("1");
 
-  // const [deployer] = await ethers.getSigners();
-  // console.log("deployer: ", deployer.address);
-  // console.log("getChainId: ", await deployer.getChainId());
-  // const chainId = await deployer.getChainId();
+  const Lock = await ethers.getContractFactory("Lock");
+  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
-      // If we are on a local development network, we need to deploy mocks!
-    // if (chainId == 31337) {
-    //     // deploying contract
-    //   const whitelistContract = await ethers.getContractFactory("Whitelist");
-    //   const whitelist = await whitelistContract.deploy(250);
-    //   await whitelist.deployed();
-    //   console.log("Launchpad contract deployed on local blockchian!")
+  await lock.deployed();
 
-    // }
-    // else {
-        // deploying contract
-        // const whitelistContract = await ethers.getContractFactory("Whitelist");
-        // const whitelist = await whitelistContract.deploy(250);
-        // await whitelist.deployed();
-        // console.log("Launchpad contract deployed on testnetwork!")  
-        // await verify(whitelist.address, [])
-    // }
-
+  console.log("Lock with 1 ETH deployed to:", lock.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -7,6 +7,7 @@ import abi from "../utils/abis.json";
 import { Box, Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { Divider } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/react'
+import { Whitelist } from "../types";
 
 interface User {
   address: string;
@@ -70,11 +71,11 @@ export default function Home() {
   const addAddressToWhitelist = async () => {
     try {
       if (user?.singer) {
-        const whitelistContract = new Contract(
+        const whitelistContract: Whitelist = new Contract(
           addresses.whitelist,
           abi,
           user.singer
-        );
+        ) as Whitelist;
         const tx = await whitelistContract.addAddressToWhitelist();
         setLoading(true);
         // wait for the transaction to get mined
@@ -94,11 +95,11 @@ export default function Home() {
   const checkIfAddressInWhitelist = async (singer: providers.JsonRpcSigner) => {
     setLoading(true)
     try {
-      const whitelistContract = new Contract(
+      const whitelistContract: Whitelist = new Contract(
         addresses.whitelist,
         abi,
         singer
-      );
+      ) as Whitelist;
       // call the whitelistedAddresses from the contract
       const address = await singer.getAddress()
       const _joinedWhitelist = await whitelistContract.whitelistedAddresses(address);
@@ -119,11 +120,11 @@ export default function Home() {
 
     try {
       const provider = ethers.getDefaultProvider("kovan");
-      const whitelistContract = new Contract(
+      const whitelistContract: Whitelist = new Contract(
         addresses.whitelist,
         abi,
         provider
-      );
+      ) as Whitelist;
 
       const _whitelistedLimit = await whitelistContract.maxWhitelistedAddresses();
       setWhitelistedLimit(_whitelistedLimit);
