@@ -1,0 +1,18 @@
+{
+    "title": "PIAIC's Non-Fungible Token 3",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "PIAIC NFT 3"
+        },
+        "description": {
+            "type": "string",
+            "description": "Let's learn web3.0 with PIAIC"
+        },
+        "image": {
+            "type": "string",
+            "description": "https://gateway.pinata.cloud/ipfs/QmV8W58rYmCaUgPGmm3VG8riDiohHSu2NP9CfvMVYGPNVq/piaic3.svg"
+        }
+    }
+}
