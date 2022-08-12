@@ -47,7 +47,8 @@ module.exports = async ({getNamedAccounts, deployments}: HardhatRuntimeEnvironme
         })
         log("NftMarketplace contract deployed on testnet!")
         await sleep(5000);
-        // await verify(NftMarketplaceContract.address, [])
+        // await verify(nftContract.address, [])
+        await verify(NftMarketplaceContract.address, [])
     }
 
 
