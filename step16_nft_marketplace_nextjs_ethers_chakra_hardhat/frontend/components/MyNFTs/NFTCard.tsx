@@ -29,7 +29,6 @@ const NFTCard = (
         const contract = new Contract(addresses.NFTContract, abi.NFTContract, signer) as NFTContract;
         try{
             const tx = await contract.approve(addresses.NftMarketplace, token.id);
-            console.log("tx: ", tx);
             await tx.wait(1);
             setIsApproved(true);
         }

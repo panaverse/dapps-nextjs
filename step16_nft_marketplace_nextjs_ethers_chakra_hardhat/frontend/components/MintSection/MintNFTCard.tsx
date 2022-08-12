@@ -16,7 +16,6 @@ const MintNFTCard = ({ token }: { token: TokenData }) => {
         if (!provider) return;
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        console.log("address: ", address);
 
         const NFTContract: NFTContract = new Contract(addresses.NFTContract, abi.NFTContract, signer) as NFTContract;
         const tx = await NFTContract.mint(id);
